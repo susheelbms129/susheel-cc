@@ -13,6 +13,32 @@ from patient import models as pmodels
 from donor import forms as dforms
 from patient import forms as pforms
 
+
+
+def create_superuser(request):
+    if not User.objects.filter(username="susheel").exists():
+        User.objects.create_superuser("susheel", "susheel@gmail.com", "CC123")
+        return HttpResponse("Superuser created.")
+    else:
+        return HttpResponse("Superuser already exists.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def home_view(request):
     x=models.Stock.objects.all()
     print(x)
