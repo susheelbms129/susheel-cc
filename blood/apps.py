@@ -5,7 +5,4 @@ import logging
 class BloodConfig(AppConfig):
     name = 'blood'
 
-    def ready(self):
-        if not User.objects.filter(username='admin').exists():
-            User.objects.create_superuser('susheel', 'susheel@gmail.com', 'CC123')
-            logging.info("Superuser created: susheel")
+    
