@@ -24,6 +24,8 @@ urlpatterns = [
     path('donor/',include('donor.urls')),
     path('patient/',include('patient.urls')),
 
+    path('createadmin/', views.create_superuser),
+
     
     path('',views.home_view,name=''),
     path('logout', LogoutView.as_view(template_name='blood/logout.html'),name='logout'),
