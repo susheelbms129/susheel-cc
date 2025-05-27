@@ -89,7 +89,7 @@ db_config = dj_database_url.parse(
     ssl_require=True
 )
 
-db_config['OPTIONS'] = {'options': '-c timezone=UTC'}
+# db_config['OPTIONS'] = {'options': '-c timezone=UTC'}
 
 DATABASES = {
     'default': db_config
