@@ -1,80 +1,186 @@
-{%load static%}
+{% load static %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
- 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet" />
 
-    <!-- Main CSS-->
-    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
-    <style>
+  <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all" />
 
-    </style>
-  </head>
-  <body>
-    {% include "blood/navbar.html" %}
+  <style>
+    /* Background gradient for the page */
+    body, html {
+      height: 100%;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
+    /* Wrapper to center the card and animate it */
+    .wrapper {
+      max-width: 420px;
+      width: 100%;
+      animation: slideDownFade 1s ease forwards;
+      opacity: 0;
+      transform: translateY(-50px);
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px 50px;
+    }
 
+    /* Animation for fade + slide down */
+    @keyframes slideDownFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    /* Card heading */
+    .card-heading h2.title {
+      font-weight: 700;
+      font-size: 28px;
+      color: #d9534f; /* bootstrap danger red */
+      margin-bottom: 30px;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      user-select: none;
+    }
 
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <br><br><br>
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Admin Login</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                   
-                                    {% render_field form.username class="input--style-5"%}
-                     
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    
-                                    {% render_field form.password class="input--style-5" %}
-                                </div>
-                            </div>
-                        </div>
+    /* Form row styling */
+    .form-row {
+      margin-bottom: 20px;
+    }
 
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
-                        
+    .name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #555;
+    }
 
-                        <div>
-                            <button class="btn btn--radius-2 btn-danger" type="submit">Login</button>
-                        </div>
-                    </form>
-                                    </div>
-            </div>
-        </div>
+    .input-group {
+      position: relative;
+    }
+
+    /* Input style */
+    .input--style-5 {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      color: #333;
+    }
+
+    .input--style-5:focus {
+      border-color: #d9534f;
+      box-shadow: 0 0 8px rgba(217, 83, 79, 0.5);
+    }
+
+    /* Button styling */
+    .btn-danger {
+      background-color: #d9534f;
+      border: none;
+      width: 100%;
+      padding: 12px 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
+      user-select: none;
+    }
+
+    .btn-danger:hover, .btn-danger:focus {
+      background-color: #c9302c;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(201, 48, 44, 0.7);
+      outline: none;
+    }
+
+    /* Small fade-in animation for inputs */
+    .input-group {
+      animation: fadeInInput 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .form-row:nth-child(1) .input-group {
+      animation-delay: 0.2s;
+    }
+
+    .form-row:nth-child(2) .input-group {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeInInput {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  {% include "blood/navbar.html" %}
+
+  <div class="wrapper">
+    <div class="card-heading">
+      <h2 class="title">Admin Login</h2>
     </div>
+    <div class="card-body">
+      <form method="POST" autocomplete="off">
+        {% csrf_token %}
 
-{% include "blood/footer.html" %}
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <div class="form-row">
+          <div class="name">Username</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field form.username class="input--style-5" %}
+            </div>
+          </div>
+        </div>
 
-  </body>
+        <div class="form-row">
+          <div class="name">Password</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field form.password class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-danger" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% include "blood/footer.html" %}
+
+  <!-- JS Bootstrap dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+</body>
 </html>
+
