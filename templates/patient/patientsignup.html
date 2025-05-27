@@ -1,176 +1,291 @@
-{%load static%}
+{% load static %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <title>Patient Signup</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
- 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all" />
 
-    <!-- Main CSS-->
-
-    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
     <style>
+      body {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        font-family: "Open Sans", sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 10px;
+      }
+      .signup-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 40px 30px;
+        max-width: 600px;
+        width: 100%;
+        color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .signup-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+      }
+      .signup-card h2.title {
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      .form-row {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .form-row .name {
+        flex: 0 0 120px;
+        font-weight: 600;
+        font-size: 1rem;
+        align-self: center;
+      }
+      .form-row .value {
+        flex: 1;
+      }
+      .input--style-5 {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transition: background 0.3s ease;
+      }
+      .input--style-5::placeholder {
+        color: #eee;
+      }
+      .input--style-5:focus {
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        color: #fff;
+      }
+      select {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 1rem;
+        appearance: none;
+        outline: none;
+        transition: background 0.3s ease;
+      }
+      select:focus {
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        color: #fff;
+      }
+      .btn-danger {
+        background: #ff4b5c;
+        border: none;
+        font-weight: 700;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        width: 100%;
+        transition: background 0.3s ease;
+      }
+      .btn-danger:hover {
+        background: #ff1c33;
+      }
+      p.text-center {
+        margin-top: 25px;
+        font-size: 1rem;
+      }
+      p.text-center a {
+        color: #ff4b5c;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      p.text-center a:hover {
+        text-decoration: underline;
+      }
 
+      /* Responsive */
+      @media (max-width: 576px) {
+        .form-row {
+          flex-direction: column;
+        }
+        .form-row .name {
+          margin-bottom: 8px;
+        }
+      }
     </style>
   </head>
   <body>
     {% include "blood/navbar.html" %}
 
+    <div class="signup-card">
+      <h2 class="title">Patient Signup</h2>
+      <form method="POST" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
 
-
-
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <br><br><br>
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Patient Signup</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST" autocomplete="off" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                        <div class="form-row">
-                            <div class="name">First Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.first_name|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Last Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.last_name|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.username|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-  
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.password|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Age</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.age|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-row">
-                            <div class="name">Blood Group</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="bloodgroup">
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option>O+</option>
-                                            <option>O-</option>
-                                            <option>A+</option>
-                                            <option>A-</option>
-                                            <option>B+</option>
-                                            <option>B-</option>
-                                            <option>AB+</option>
-                                            <option>AB-</option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Disease</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.disease|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Doctor Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.doctorname|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Address</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.address|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Mobile</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.mobile|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Profile Pic</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field patientForm.profile_pic|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-   
-  
-  
-
-                        <div>
-                            <button class="btn btn--radius-2 btn-danger" type="submit">Register</button>
-                        </div>
-                    </form>
-                    <br>
-                    <p style="text-align: center;">Already have an account ? <a style="text-decoration: none;" href="/patient/patientlogin">Click here to login</a></p>
-
-                </div>
+        <div class="form-row">
+          <div class="name">First Name</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field userForm.first_name|attr:'required:true' class="input--style-5" %}
             </div>
+          </div>
         </div>
+
+        <div class="form-row">
+          <div class="name">Last Name</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field userForm.last_name|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Username</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field userForm.username|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Password</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field userForm.password|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Age</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.age|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Blood Group</div>
+          <div class="value">
+            <select name="bloodgroup" required>
+              <option disabled selected>Choose option</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Disease</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.disease|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Doctor Name</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.doctorname|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Address</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.address|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Mobile</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.mobile|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Profile Pic</div>
+          <div class="value">
+            <div class="input-group">
+              {% render_field patientForm.profile_pic|attr:'required:true' class="input--style-5" %}
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-danger" type="submit">Register</button>
+      </form>
+
+      <p class="text-center">
+        Already have an account?
+        <a href="/patient/patientlogin">Click here to login</a>
+      </p>
     </div>
 
-{% include "blood/footer.html" %}
-<!-- Optional JavaScript -->
+    {% include "blood/footer.html" %}
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
+
