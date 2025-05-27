@@ -170,11 +170,37 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-STATIC_DIR,
- ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # where Django collects static files
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS=[
+# STATIC_DIR,
+#  ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # where Django collects static files
+
+
+
+
+
+
+
+# Instead of local static path, use the Render static URL
+STATIC_URL = 'https://bloodbank-static.onrender.com/'
+
+# Remove or comment these — not needed when serving from external URL
+# STATICFILES_DIRS = [STATIC_DIR]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
