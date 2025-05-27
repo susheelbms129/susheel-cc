@@ -1,49 +1,78 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <title>Blood Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .xyz{
-          margin-bottom: 0px;
-          background-image: url('{% static "image/homepage.jpg" %}');
-          background-size: cover;
-          background-repeat: no-repeat;
+        .xyz {
+            margin-bottom: 0px;
+            background-image: url('{% static "image/blood_bg.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            color: white;
         }
-      </style>
-      
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .quote-container {
+            z-index: 2;
+            position: relative;
+        }
+
+        .jumbotron.quote {
+            background-color: #f8f9fa;
+            color: #b30000;
+            font-family: 'Georgia', serif;
+            padding: 40px 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 
-
 <body>
-  {% include "blood/navbar.html" %}
-<br>
-<section id="section-jumbotron" style="margin-bottom: 0px;" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz">
-    <div class="container text-center">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-     
-      
-      <br><br><br><br>
-      
-    </div>  
-  </section>
+    {% include "blood/navbar.html" %}
+    <br>
 
+    <!-- Hero Section -->
+    <section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz">
+        <div class="overlay"></div>
+        <div class="container text-center quote-container">
+            <h1 class="display-4 font-weight-bold">Be a Hero. Be a Donor.</h1>
+            <p class="lead">"Your blood can give someone another chance at life."</p>
+        </div>
+    </section>
 
-  <div class="jumbotron" style="margin-top: 0px;margin-bottom: 0px;">
+    <!-- Inspirational Quote Section -->
+    <div class="jumbotron quote text-center">
+        <p class="lead font-italic">“Opportunities knock the door sometimes, so don’t let it go and donate blood.”</p>
+    </div>
 
-    <p class="lead text-center">“Opportunities knock the door sometimes, so don’t let it go and donate blood.”
-      </p>
-    
-    <p class="text-center">- LazyCoder</p>
-    
-  </div>
-  {% include "blood/footer.html" %}
+    {% include "blood/footer.html" %}
 
+    <!-- Footer Note -->
+    <footer>
+        Made with ❤️ by Susheel
+    </footer>
 
 </body>
 
 </html>
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
