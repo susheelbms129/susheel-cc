@@ -79,6 +79,10 @@ WSGI_APPLICATION = 'bloodbankmanagement.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
+import dj_database_url
+
+
 DATABASES = {
     'default': dj_database_url.parse(
         'postgresql://neondb_owner:npg_9HOTI0VdJLnM@ep-mute-snow-a5d8m3y8-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
