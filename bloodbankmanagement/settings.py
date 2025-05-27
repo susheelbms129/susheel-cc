@@ -12,6 +12,43 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
+
+from django.db.backends.postgresql.utils import utc_tzinfo_factory
+
+def no_assertion_utc_tzinfo_factory(*args, **kwargs):
+    import pytz
+    return pytz.UTC
+
+import django.db.backends.postgresql.utils
+django.db.backends.postgresql.utils.utc_tzinfo_factory = no_assertion_utc_tzinfo_factory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
