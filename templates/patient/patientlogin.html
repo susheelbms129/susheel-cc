@@ -1,82 +1,147 @@
-{%load static%}
+{% load static %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Login</title>
+
+    <!-- Bootstrap and Icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
- 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
-    <!-- Main CSS-->
-    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
+    <!-- Fonts and Main CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+
     <style>
+        body {
+            background: linear-gradient(to right, #ff4e50, #f9d423);
+            font-family: 'Open Sans', sans-serif;
+        }
 
+        .card-custom {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-heading h2 {
+            font-weight: 700;
+            color: #dc3545;
+            text-align: center;
+        }
+
+        .form-row {
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            border-radius: 30px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.3);
+            outline: none;
+        }
+
+        .btn-danger {
+            border-radius: 30px;
+            padding: 10px 30px;
+            font-weight: bold;
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: #dc3545;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     {% include "blood/navbar.html" %}
 
-
-
-
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <br><br><br>
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Patient Login</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field form.username class="input--style-5"%}
-
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-custom">
+                    <div class="card-heading mb-4">
+                        <h2 class="title">Patient Login</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name mb-2">Username</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        {% render_field form.username class="form-control" placeholder="Enter your username" %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field form.password class="input--style-5" %}
+                            <div class="form-row">
+                                <div class="name mb-2">Password</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        {% render_field form.password class="form-control" placeholder="Enter your password" %}
+                                    </div>
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <button class="btn btn-danger mt-3" type="submit">Login</button>
+                            </div>
+                        </form>
+                        <div class="register-link">
+                            <p>Don't have an account? <a href="/patient/patientsignup">Click here to register</a></p>
                         </div>
-
-
-                        
-
-                        <div>
-                            <button class="btn btn--radius-2 btn-danger" type="submit">Login</button>
-                        </div>
-                    </form>
-                    <br>
-                    <p style="text-align: center;">Does not have an account ? <a style="text-decoration: none;" href="/patient/patientsignup">Click here to register</a></p>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-{% include "blood/footer.html" %}
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% include "blood/footer.html" %}
 
-  </body>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
 </html>
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
