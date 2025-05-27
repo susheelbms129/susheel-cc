@@ -35,12 +35,52 @@
             margin: 0;
             padding: 20px;
             font-size: 1rem;
+            background-color: #f8f9fa;
+            color: #b30000;
         }
-        
+
         footer {
             position: relative;
             width: 100%;
             bottom: 0;
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Flowing quote animation */
+        @keyframes flowText {
+            0% {
+                transform: translateX(-100%);
+                color: #ff4e50;
+            }
+
+            25% {
+                color: #ff6f61;
+            }
+
+            50% {
+                transform: translateX(0%);
+                color: #f9d423;
+            }
+
+            75% {
+                color: #32cd32;
+            }
+
+            100% {
+                transform: translateX(100%);
+                color: #00bcd4;
+            }
+        }
+
+        .flowing-quote {
+            display: inline-block;
+            white-space: nowrap;
+            animation: flowText 8s linear infinite alternate;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -60,7 +100,9 @@
 
     <!-- Inspirational Quote Section -->
     <div class="jumbotron quote text-center">
-        <p class="lead font-italic">“Opportunities knock the door sometimes, so don’t let it go and donate blood.”</p>
+        <p class="lead font-italic">
+            <span class="flowing-quote">“Opportunities knock the door sometimes, so don’t let it go and donate blood.”</span>
+        </p>
     </div>
 
     {% include "blood/footer.html" %}
@@ -73,3 +115,4 @@
 </body>
 
 </html>
+
