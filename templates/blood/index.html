@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .xyz {
-            margin-bottom: 0px;
             background-image: url('{% static "image/blood_bg.jpg" %}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            height: 100vh;
+            height: calc(100vh - 150px); /* adjust based on footer + quote height */
             position: relative;
             color: white;
         }
@@ -33,17 +32,15 @@
         }
 
         .jumbotron.quote {
-            background-color: #f8f9fa;
-            color: #b30000;
-            font-family: 'Georgia', serif;
-            padding: 40px 20px;
+            margin: 0;
+            padding: 20px;
+            font-size: 1rem;
         }
-
+        
         footer {
-            background-color: #343a40;
-            color: white;
-            padding: 10px;
-            text-align: center;
+            position: relative;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
