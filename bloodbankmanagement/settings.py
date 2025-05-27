@@ -84,7 +84,7 @@ import dj_database_url
 import os
 
 db_config = dj_database_url.parse(
-    os.getenv('DATABASE_URL'),
+    'postgresql://neondb_owner:npg_9HOTI0VdJLnM@ep-mute-snow-a5d8m3y8-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
     conn_max_age=600,
     ssl_require=True
 )
